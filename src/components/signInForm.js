@@ -1,6 +1,11 @@
 import React, { useState } from "react";
+import Container from "react-bootstrap/Container";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Alert from 'react-bootstrap/Alert'
 
-const SignInForm = ({signIn}) => {
+
+const SignInForm = ({loginFailed, signIn}) => {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -25,12 +30,39 @@ const SignInForm = ({signIn}) => {
         signIn(user);
     }
 
+    const style = {
+        width: "30%",
+        position: "absolute",
+        top: "40%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+        border: "1px solid lightgray",
+        padding: 30,
+        paddingTop: 50,
+        paddingBottom: 50
+    } 
+
+    const alertStyle = {
+        display: loginFailed ? "block" : "none"
+    }
+
     return (
-        <form onSubmit={handleSignIn}>
-            <input type="text" name="username" value={username} onChange={handleUsernameChange}></input>
-            <input type="password" name="password" value={password} onChange={handlePasswordChange}></input>
-            <button type="submit">Sing In</button>
-        </form>
+        <Container style={style}>
+            <Alert variant="danger" style={alertStyle}>
+                Invalid username or password
+            </Alert> 
+            <Form onSubmit={handleSignIn}>
+                <Form.Group>
+                    <Form.Label>Username:</Form.Label>
+                    <Form.Control type="text" name="username" value={username} onChange={handleUsernameChange} />
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Password:</Form.Label>
+                    <Form.Control type="password" name="password" value={password} onChange={handlePasswordChange} />
+                </Form.Group>
+                <Button type="submit">Sign In</Button>
+            </Form>
+        </Container>
     )
 }
 

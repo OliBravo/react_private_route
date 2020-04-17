@@ -5,11 +5,10 @@ import {
 } from "./actions";
 
 const initState = {
-    user: {
-        inProgress: false,
-        loggedIn: false,
-        username: ""
-    }
+    inProgress: false,
+    loggedIn: false,
+    username: "",
+    loginFailed: null
 }
 
 const user = (state = initState, action) => {
@@ -18,22 +17,25 @@ const user = (state = initState, action) => {
             return ({
                 inProgress: true,
                 loggedIn: false,
-                username: action.payload.username
+                username: action.payload.username,
+                loginFailed: null
             });
         case SINGIN_SUCCESS:
             return ({
                 inProgress: false,
                 loggedIn: true,
-                username: action.payload.username
+                username: action.payload.username,
+                loginFailed: false
             });
         case SIGNIN_FAILED:
             return ({
                 inProgress: false,
                 loggedIn: false,
-                username: ""
-            });    
+                username: null,
+                loginFailed: true
+            });
         default:
-            return(state);
+            return (state);
     }
 }
 
