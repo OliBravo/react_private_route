@@ -1,7 +1,8 @@
 import {
     SINGIN_START,
     SINGIN_SUCCESS,
-    SIGNIN_FAILED
+    SIGNIN_FAILED,
+    SIGN_OUT
 } from "./actions";
 
 const initState = {
@@ -34,6 +35,13 @@ const user = (state = initState, action) => {
                 username: null,
                 loginFailed: true
             });
+        case SIGN_OUT:
+            return ({
+                ...state,
+                inProgress: false,
+                username: null,
+                loggedIn: false
+            })
         default:
             return (state);
     }
