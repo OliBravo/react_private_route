@@ -1,6 +1,5 @@
 import React from 'react';
 import SignInForm from "./containers/signInForm";
-import User from "./containers/user";
 import NotFound from "./components/NotFound";
 import Home from "./containers/Home";
 import './App.css';
@@ -25,8 +24,8 @@ function App() {
           <ul>
             <li><Link to="/">Home</Link></li>
             <li><Link to="/login">Sign In</Link></li>
-          </ul></nav>
-          <User />
+          </ul>
+        </nav>
 
         <Switch>
           <PrivateRoute exact path="/" component={Home} />

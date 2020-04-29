@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import Alert from 'react-bootstrap/Alert';
 
 
-const SignInForm = ({signIn}) => {
+const SignInForm = ({loginFailed, signIn}) => {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -39,8 +40,11 @@ const SignInForm = ({signIn}) => {
         paddingBottom: 50
     } 
 
+    const displayAlert = loginFailed !== true ? "none" : "block";
+
     return (
         <Container style={style}>
+            <Alert variant="danger" style={{display: displayAlert}}>Invalid login and/or password</Alert>
             <Form onSubmit={handleSignIn}>
                 <Form.Group>
                     <Form.Label>Username:</Form.Label>
