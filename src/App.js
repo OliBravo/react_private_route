@@ -15,17 +15,24 @@ import {
 import PrivateRoute from "./containers/PrivateRoute";
 import { history } from "./helpers/history";
 import { Unauthorised } from './components/Unauthorised';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar'
 
 function App() {
   return (
     <Provider store={store}>
       <Router history={history}>
-        <nav>
-          <ul>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/login">Sign In</Link></li>
-          </ul>
-        </nav>
+        <Navbar bg="dark" variant="dark">
+          <Nav>
+            <Nav.Item>
+              <Nav.Link as={Link} to="/">Home</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link as={Link} to="/login">Sign In</Nav.Link>
+            </Nav.Item>
+          </Nav>
+        </Navbar>
+        
 
         <Switch>
           <PrivateRoute exact path="/" component={Home} />
