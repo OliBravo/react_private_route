@@ -9,7 +9,8 @@ const initState = {
     inProgress: false,
     loggedIn: false,
     username: "",
-    loginFailed: null
+    loginFailed: null,
+    token: ""
 }
 
 const user = (state = initState, action) => {
@@ -19,28 +20,32 @@ const user = (state = initState, action) => {
                 inProgress: true,
                 loggedIn: false,
                 username: action.payload.username,
-                loginFailed: null
+                loginFailed: null,
+                token: ""
             });
         case SINGIN_SUCCESS:
             return ({
                 inProgress: false,
                 loggedIn: true,
                 username: action.payload.username,
-                loginFailed: false
+                loginFailed: false,
+                token: action.payload.accessToken
             });
         case SIGNIN_FAILED:
             return ({
                 inProgress: false,
                 loggedIn: false,
                 username: null,
-                loginFailed: true
+                loginFailed: true,
+                token: ""
             });
         case SIGN_OUT:
             return ({
                 ...state,
                 inProgress: false,
                 username: null,
-                loggedIn: false
+                loggedIn: false,
+                token: ""
             })
         default:
             return (state);

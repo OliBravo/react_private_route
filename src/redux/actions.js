@@ -1,4 +1,5 @@
-import fakeAPI from "../database/fakeAPI";
+// import fakeAPI from "../database/fakeAPI";
+import signIn from "../API";
 import { history } from "../helpers/history";
 
 const SINGIN_START = "[user] - sing in start";
@@ -27,10 +28,14 @@ const signOut = () => ({
 const asyncSignIn = ({ username, password }) => dispatch => {
     dispatch(signInStart);
 
-    fakeAPI.login({ username, password })
+    signIn(username, password)
         .then(res => {
-            dispatch(signInSuccess(res));
-            history.push("/");
+            if (res.username !== undefined) {
+                dispatch(signInSuccess(res));
+                history.push("/");
+            } else {
+                throw new Error("Invalid creds")
+            }            
         })
         .catch(err => {
             console.warn(err)
